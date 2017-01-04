@@ -1,4 +1,4 @@
-﻿# 日常总结
+# 日常总结
 
 标签（空格分隔）： 未分类
 
@@ -90,6 +90,19 @@
 ```
     很多javascript库使用data-属性来进行组件或者API定义，bootstrap中同样使用data-api风格 
 ***
+**meta标签**
+1.viewport
+```
+<meta name="viewport" content="width:device-width,initial-scale=1,user-scalable=no">
+```
+2.format-detection 格式检测 用法：
+```
+<meta name="format-detaction" content="telephone=no,eamil=no,adress=no">
+```
+3.http-equiv属性
+```
+<meta http-equiv="参数" content="参数变量值">
+```
 **iframe标签**
 为创建框架式网页获取嵌入外部网页，现该标签存在安全策略，被视为独立的源，且不能提交表单也不能执行javascript，无法控制符页面导航行为
 如想修改安全策略，可以在sandbox属性中使用预定义的字符串
