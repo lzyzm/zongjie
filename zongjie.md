@@ -1,4 +1,4 @@
-# 日常总结
+﻿# 日常总结
 
 标签（空格分隔）： 未分类
 
@@ -26,7 +26,7 @@
 \$ git tag -a v1.0 **打上标签**
 \$ git tag **查看标签**
 \$ git checkout -b (branchname) **创建并切换分支**
-\$ git remote add (origin) (master) **添加到远程仓库**
+\$ git remote add (origin) (master) **添加远程仓库**
 \$ git remote **查看当前配置有哪些仓库**
 \$ git fetch **从远程仓库下载新分支与数据**
 \$ git pull **从远程仓库提取数据并尝试合并到当前分支**
@@ -90,19 +90,6 @@
 ```
     很多javascript库使用data-属性来进行组件或者API定义，bootstrap中同样使用data-api风格 
 ***
-**meta标签**
-1.viewport
-```
-<meta name="viewport" content="width:device-width,initial-scale=1,user-scalable=no">
-```
-2.format-detection 格式检测 用法：
-```
-<meta name="format-detaction" content="telephone=no,eamil=no,adress=no">
-```
-3.http-equiv属性
-```
-<meta http-equiv="参数" content="参数变量值">
-```
 **iframe标签**
 为创建框架式网页获取嵌入外部网页，现该标签存在安全策略，被视为独立的源，且不能提交表单也不能执行javascript，无法控制符页面导航行为
 如想修改安全策略，可以在sandbox属性中使用预定义的字符串
@@ -137,6 +124,68 @@ margin/存在外边距折叠现象，根据margin的正负存在几个规则：
 2.表格的布局机制：表格的宽度布局算法有两种，一种是固定，一种是自动，可以使用table-layout属性指定（auto/fiexd）
 3.表格的边框：在于掌握border-collapse属性-一种是边框分离模型，这种模型下每个单元格以及table边框都是独立的，此时可以使用border-spacing属性指定单元格边框距离border-collapse：separate----一种是边框合并模型，使用border-collapse：collapse来指定
 **选择器的增加**
+1.属性选择器
+2.结构性伪类选择器：：nth-child和nth-of-type的区别
+**背景：**
+background-size有两个关键字cover和contain.cover用于等比扩展图片来填满元素，即用图片覆盖住元素。contain则是等比缩小图片来适应元素，即让元素容纳整个图片。
+background-origin背景绘制起始区域，background-clip背景裁剪起始区域，他们都可以指定border-box、padding-box、和content-box；；；可以应用背景不想覆盖住padding时，可以设置
+**渐变和阴影**
+线性渐变和径向渐变
+线性：
+```
+#div{background:-webkit-linear-gradient(to,black,white)}
+#div1{background:-webkit-linear-gradient(45deg,black,white)}
+#div2{background:-webkit-linear-gradient(gray,black,white,yellow)}
+```
+径向：
+```
+#div{background:-webkit-radial-gradient(bottom,circle,black,gray 20%,black 40%,white 60%)}
+circle表示渐变成正圆，相应ellipse非正圆，
+```
+线性渐变和径向渐变都不会自动重复，存在repeating-linear-gradient和repeating-radial-gradient属性提供重复
+```
+#div1{background:-webkit-repeating-linear-gradient(-45deg,black,black 5px,white 5px,white 10px)}
+#div1{background:-webkit-repeating-radial-gradient(circls,black,black 5px,white 5px,white 10px)}
+```
+阴影：
+一类是文字阴影text-shadow：1px 1px 4px gray，
+```
+text-shadow:-1px 0px 0px gray,
+             1px 0px 0px gray,
+             0px -1px 0px gray,
+             0px 1px 0px gray;
+```
+一类是盒阴影box-shadow:1px 1px 5px gray
+**css3布局**
+1.负边距与浮动（双飞翼布局）
+2.栅格系统与多列布局
+多列布局模块：
+```
+-webkit-column-count:2//列数
+-webkit-column-width：10em//列宽
+-webkit-column-gap:5em//列与列中间缝隙
+-webkit-column-rule:6px solid blue//列中间的分割线
+```
+3.弹性盒模型（Flexible Box）
+a.弹性容器（flex container）
+display属性为flex或为inline-flex的元素将变成一个弹性容器
+b.弹性项
+弹性容器内的子元素自动成为可供布局的弹性项
+c.轴线
+默认情况下弹性容器中的子元素将在水平上排布，通过设置flex-flow属性来改变，可以设置为row/row-reverse/column/column-reverse四种值
+d.方向（derections）
+弹性项可以使用order属性指定出现顺序
+e.尺寸（Dimensions）
+flex属性
+e.尺寸（）
+**css3动画**
+1.css变形
+transform和transform-origin是css变形最主要的两个属性，transform指定要对元素进行哪些变形，transform-origin则指定变形的起始位置
+transform包含rotate、skewx、translate、scale函数，分别可以接受x/y/z三个值，3D：rotate3d；
+（1）**透视（perspective）**
+次理解3d变形的关键，-webkit-transform-style:preserve-3d指定元素在3d空间内的定位
+-webkit-perspective-origin：-100% -50%指定用户从哪个方向看过来
+
 
 
 
