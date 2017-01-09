@@ -185,7 +185,34 @@ transform包含rotate、skewx、translate、scale函数，分别可以接受x/y/
 （1）**透视（perspective）**
 次理解3d变形的关键，-webkit-transform-style:preserve-3d指定元素在3d空间内的定位
 -webkit-perspective-origin：-100% -50%指定用户从哪个方向看过来
-
+**animation**
+animation多个属性的集合：
+animation-delay：动画开始前的延迟；
+animation-duration:动画时长；
+ainmation-iteration-count：动画重复次数，设置为infinite为无限动；
+animation-name：要使用的动画名；
+animation-direction：动画方向，值有reverse，alternate（往复运动），alternate-reverse
+animation-timing-function:缓动函数-ease（先慢后快再慢），ease-in（先慢后快），ease-out（先快后慢），linear（线性）
+animation-dill-mode:通过设置forwards、backwarks和both可以将元素最终状态设置为动画的起始或结束状态
+animation提供了一些事件用以控制动画，animationstart：动画开始时触发；animationend：动画结束时触发；animationiteration：动画每迭代一次触发一次改事件
+**响应式设计**
+PPI：像素密度，每英寸的像素数量，及为PPI值。
+设备像素比：物理分辨率/逻辑分辨率的比值。retina设备的像素比2、1.5。在javascript里通过访问window.devicePixelRatio的值来确定
+可见视口和布局视口
+media queries---书写样式
+```
+@media all and (max-width:320px) and (-webkit-min-device-pixel-radio:2){
+    /*在这里编写针对 iphone retina屏幕的代码*/
+}
+```
+media queries规则还可以直接写到link元素的media属性中,可以按需加载css文件
+```
+<link rel="stylesheet" href="wide.css" media="screen and (min-width:1024px)">
+```
+在javascript中也可以使用media queries，DOM中提供了接口，方法
+```
+var mql=window.matchMedia("(orientation:portrait)")
+```
 
 
 
