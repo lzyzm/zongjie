@@ -1,4 +1,4 @@
-﻿# 日常总结
+﻿# 日常总结 
 
 标签（空格分隔）： 未分类
 
@@ -213,6 +213,102 @@ media queries规则还可以直接写到link元素的media属性中,可以按需
 ```
 var mql=window.matchMedia("(orientation:portrait)")
 ```
+**WEB**
+cookie通过封装函数setCookie和getCookie来操作具体的cookie；
+encodeURIComponent（编码）和decodeURIComponent（解码）
+cookie限制：浏览器在cookie数量上的限制，大小的限制
+web Storage:
+sessionStorage中存储的数据只在单个页面的会话期间有效，localStorage的数据则会被持久化到客户端
+localStorage.setItem("name","liming")
+localStorage.getItem("name")
+localStorage.removeItem("name")
+如果要存储JSON对象，使用window.Json对象提供的stringify和parse进行JSON数据的序列化和反序列化
+**storage事件**
+监听该事件
+domain:发生变化的域名
+key:发生修改的键
+oldValue：修改前的值
+newValue：修改后的值
+```
+document.addEventListener("storage",function(e){
+    console.log("Storage changed.Name'"+e.key+"'changed form'"......)
+    //存在兼容性，不建议使用
+})
+```
+IE的userData
+**离线应用**
+h5提供缓存机制:Application Cache(应用缓存)
+基本使用
+```
+<!DOCTYPE html>
+<html manifest="/appcache.manifest">
+//这个html本身一定会被缓存
+</html>
+```
+appcache.manifest其实就是一个文件，指定了需要浏览器缓存的资源，
+```
+CACHE MANIFEST
+index.heml
+/favicon.ico
+images/logo.png
+//必须在有网络时才能访问的资源
+http://api.weibo.com
+FALLBACK
+//所有images目录下的文件不可用时被请求，则读取images/offline.jpg
+images/images/offline.png
+```
+更新缓存方法：
+编程接口：通过javascript访问离线缓存接口，window.applicationCache对象定义了应用缓存的接口，applicationCache.update()方法检测更新，当下载完调用applicationCache.swapCache()完成更新缓存，使用applicationCache.status属性查询缓存当前状态；
+***
+**拖放**
+事件对象中target对象和currentTarget对象的区别：
+1、target在事件流的目标阶段；currentTarget在事件流的捕获，目标及冒泡阶段。 
+2、event.currentTarget指向事件所绑定的元素，而event.target始终指向事件发生时的元素。 
+3、事件真正的发送者是evt.target（而且是可以变的，根据触发的不同displayObject），注册侦听器的是evt.currentTarget（不会变的）。 
+4、在 Google 浏览器内，同时拥有 srcElement 和 target 这两个标签，这两个标签本质相同，但在 FireFox 浏览器里面却没有 srcElement 标签，如果使用了 srcElement 标签，将导致不兼容 FireFix 浏览器，所以别被用错一个标签导致浏览器不兼容给坑了。
+在需要通过一个函数处理多个事件时，可以使用type属性
+
+拖拽相关的事件
+ondragstart：此事件在用户开始拖动元素或选择文本时触发 ondrag:元素正在拖动时触发 ondragend:用户完成元素拖放时触发 ondragleave:当被鼠标拖动的对象离开其容器范围时触发 ondragover:当某个被拖动的对象在另一对象容器范围内拖动时触发此事件，此事件发生在目标元素身上 ondrop:在一个拖动过程中，释放鼠标时触发，此事件作用在目标元素身上
+
+dataTransfer 对象相关方法
+setData(format,data):添加自定义数据格式 getData(format):获取自定义的数据格式clearData([format]):清除自定义的数据格式及数据
+***
+**文件操作**
+File API是HTML5在DOM标准中添加的功能，它允许WEB内容在用户授权的情况下选择本地文件并读取他们的内容----通过File、FileList和FileReader等对象共同作用来实现。
+file表单可以让用户选择一个或多个（multiple属性）
+file对象有三个属性：name文件名，size文件大小，type文件的MIMEtype
+拖拽文件使用e.dataTransfer.files;
+**FileReader**对象
+可以将文件对象转换为字符串、DataURl对象或者二进制字符串
+e.tatget.result包含读取为dataURL信息
+reader.readAsDataURL(file)此方法讲file对象读取为dataURL。
+readAsDataURL方法用于读取文件他接受一个file或Blob对象实例作为参数，并将文件内容转换为一个base64编码的URL字符串，并通过load事件讲结果e.target.result上。
+除了load事件FileReader对象还会调用这样一些事件程序：
+1.onabort：当读取操作被终止时调用
+2.onerror：当读取操作发生错误时调用
+3.onload:当读取操作完成时调用
+4.onloadend：当读取操作完成时调用，不管成功还是失败
+5.onloadstart:当读取操作将要开始之前调用
+5.onprogress：在读取数据过程中周期性调用
+onprogress是最有用的，可以设置进度条：e.total存储着当前文件总大小，e.loaded表示当前文件已经加载了多少
+***
+**touch事件**
+touch事件模型现阶段规定了很多类型触摸事件，下面三种应用最广泛
+1.touchstart：手指刚放到屏幕上某个DOM元素里的时候改元素触发。
+2.touchmove：手指紧贴屏幕移动的时候连续触发。
+3.touchend：手指从屏幕上抬起的时候触发。
+触摸事件对象包含一些工通的时间属性：
+1.touches:表示当前位于屏幕上的所有手指动作的列表，是一个TouchList类型的对象，ToushList是一个类数组对象，里面装的是Touch对象
+2.targetTouches：位于当前DOM元素上的手指动作的TouchList列表
+3.changedTouches：涉当前事件的手指动作的列表
+Touch对象包含属性：
+1.identifier：一个数字，用于唯一标识触摸会话中的当前手指
+2.target:作为动作目标的Dom元素
+3、坐标、clientX/clientY触摸点相对浏览器窗口viewport的位置，pageX/pageY触摸点相对于页面的位置，screenX/screenY:触摸点相对于屏幕的位置
+
+hammer.js手势库，几乎支持所有手势，Tap、DoubleTap；
+backface-visibility属性意思是在对元素进行变换时，如果元素的“正面看不见了，那么就隐藏整个元素hidden”
 
 
 
